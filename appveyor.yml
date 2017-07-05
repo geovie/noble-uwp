@@ -5,6 +5,7 @@ branches:
   only:
     # only run on tags eg. v1, v0.1, 0.1, 2
     - /^v?[0-9]/
+    - node4
 
 environment:
   GYP_MSVS_VERSION: 2015
@@ -12,10 +13,10 @@ environment:
   matrix:
     # node 4 x64 works, but x86 fails
     - node_version: '4'
-    - node_version: '5'
-    - node_version: '6'
-    - node_version: '7'
-    - node_version: '8'
+    #- node_version: '5'
+    #- node_version: '6'
+    #- node_version: '7'
+    #- node_version: '8'
 
 install:
   # install the right node version
@@ -25,7 +26,7 @@ install:
         npm install -g node-gyp node-pre-gyp-github npm-windows-upgrade 2>&1 | out-null
         if ($LASTEXITCODE -NE 0) { throw "Failed installing node-gyp node-pre-gyp-github npm-windows-upgrade"; }
   # update npm and node-gyp, some configurations wont build without an up to date node-gyp
-  - ps: npm-windows-upgrade --npm-version latest
+  #- ps: npm-windows-upgrade --npm-version latest
   - ps: npm -v
   - ps: node-gyp -v
   - ps: $publish_binary = 0
@@ -58,4 +59,4 @@ build_script:
       echo "done."
 platform:
   - x86
-  - x64
+  #- x64
