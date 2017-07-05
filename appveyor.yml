@@ -45,6 +45,7 @@ build_script:
         Convert-Path .
         node-gyp -v
         npm install --build-from-source 2>&1 | write-host
+        Get-Content C:\projects\noble-uwp\uwp\windows.foundation\npm-debug.log
         if ($LASTEXITCODE -NE 0) { throw "Failed building $module"; }
         ./node_modules/.bin/node-pre-gyp package 2>&1 | write-host
         if ($LASTEXITCODE -NE 0) { throw "Failed packaging $module"; }
